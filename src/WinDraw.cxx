@@ -1,4 +1,4 @@
-//  $Header: /nfs/slac/g/glast/ground/cvs/gui/src/WinDraw.cxx,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
+//  $Header: /nfs/slac/g/glast/ground/cvs/gui/src/WinDraw.cxx,v 1.2 2001/08/11 15:26:04 burnett Exp $
 //   Author: Toby Burnett
 //
 #ifdef WIN32  // stupid to prevent compilation on unix platforms 
@@ -244,8 +244,10 @@ void WinDraw::clearArea(int x, int y, int width, int height)
 static float ms=0.015f;
 void WinDraw::draw_marker(float x, float y)
 {
+#if 0 // only do an x now. TODO: allow different markers
     move_to(x-ms,y);    line_to(x+ms,y);
     move_to(x,   y-ms); line_to(x,   y+ms);
+#endif
     move_to(x-ms,y-ms); line_to(x+ms,y+ms);
     move_to(x+ms,y-ms); line_to(x-ms,y+ms);
 }
