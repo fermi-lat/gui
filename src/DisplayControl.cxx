@@ -1,4 +1,4 @@
-//     $Id: DisplayControl.cxx,v 1.6 2002/07/01 21:03:53 burnett Exp $
+//     $Id: DisplayControl.cxx,v 1.7 2002/07/02 16:10:47 burnett Exp $
 //  Author: Toby Burnett
 //
 // implementation of  Display control
@@ -287,7 +287,7 @@ DisplayControl::finishSetup()
 	new SimpleCommand<DisplayControl>(this,&DisplayControl::postScript));
     system->addButton("Dump to vrml",new VRML_command(this));
     system->addButton("Print instructions",
-			   new PrintInstructions(m_control,PrintControl::instance()->out()));
+        new PrintInstructions(m_control,&std::cout));
 
     m_running = true;
     m_scene->update();
