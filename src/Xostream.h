@@ -1,4 +1,4 @@
-//   $Header: /cvsroot/d0cvs/gui/motif/Xostream.h,v 1.1 1999/11/03 04:36:56 burnett Exp $
+//   $Id: Xostream.h,v 1.2 2000/09/21 18:19:59 burnett Exp $
 // Project:
 //  author: Toby Burnett
 //
@@ -9,10 +9,10 @@
 #define XOSTREAM_H
  
 
-#include "gui/GUI.h"
+#include "graphics/GUI.h"
 
 
-class Xostream : public std::ostream
+class Xostream :  public std::ostream
 {
 public:
     Xostream(const char* name);
