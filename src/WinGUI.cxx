@@ -1,4 +1,4 @@
-//   $Header: /nfs/slac/g/glast/ground/cvs/gui/src/WinGUI.cxx,v 1.2 2001/01/07 21:35:03 burnett Exp $
+//   $Header: /nfs/slac/g/glast/ground/cvs/gui/src/WinGUI.cxx,v 1.3 2001/05/08 03:28:50 burnett Exp $
 // Implementation of the GUI interface for MS Windows95/NT
 #ifdef WIN32
 
@@ -9,6 +9,7 @@
 #include <iostream>
 #include <strstream>
 #include "gui/SubMenu.h"
+#pragma warning( disable : 4311) // for type cast used to identify menus
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 HINSTANCE   WinGUI::s_instance =0;

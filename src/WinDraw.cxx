@@ -1,4 +1,4 @@
-//  $Header: /nfs/slac/g/glast/ground/cvs/gui/src/WinDraw.cxx,v 1.2 2001/08/11 15:26:04 burnett Exp $
+//  $Header: /nfs/slac/g/glast/ground/cvs/gui/src/WinDraw.cxx,v 1.3 2002/03/22 17:13:29 burnett Exp $
 //   Author: Toby Burnett
 //
 #ifdef WIN32  // stupid to prevent compilation on unix platforms 
@@ -281,7 +281,7 @@ void WinDraw::set_line_style( int s)
 
 void WinDraw::set_col_index(int i)
 {
-    assert( i<hbrTable.size() );
+    assert( i<static_cast<int>(hbrTable.size()) );
     ::SelectObject(m_hdc, hbrTable[i] );
 }
 
