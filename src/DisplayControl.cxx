@@ -1,4 +1,4 @@
-//     $Id: DisplayControl.cxx,v 1.3 2001/04/21 23:00:32 burnett Exp $
+//     $Id: DisplayControl.cxx,v 1.4 2001/10/06 04:22:14 burnett Exp $
 //  Author: Toby Burnett
 //
 // implementation of  Display control
@@ -456,10 +456,10 @@ DisplayControl::DisplaySubMenu& DisplayControl::DisplaySubMenu::subMenu(const st
     return *new DisplayControl::DisplaySubMenu(_display,this,rep,name);
 }
     
-void DisplayControl::DisplaySubMenu::add(DisplayRep * rep, const std::string& name)
+void DisplayControl::DisplaySubMenu::add(DisplayRep * rep, const std::string& name, bool initial_state)
 {
     _display->useMenu(_menu);
-    GUI::Toggle* display_toggle = _display->add(rep,name);
+    GUI::Toggle* display_toggle = _display->add(rep,name, initial_state);
     if( display_toggle !=0) _rep_list.push_back(display_toggle);
     _display->useMenu();
 }

@@ -1,4 +1,4 @@
-//     $Id: DisplayControl.h,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
+//     $Id: DisplayControl.h,v 1.2 2001/01/25 01:36:32 burnett Exp $
 //  Author: Toby Burnett
 //
 //
@@ -100,15 +100,16 @@ public:
         // that will be controlled by a "Show All" button at its top.
         // This button also applies to all submenus of this
 
-        void add(DisplayRep * rep, const std::string& name="");
+        void add(DisplayRep * rep, const std::string& name="", bool initial_state=true);
         // add a rep with optional name to be used for button
 
+        /// set the over-all state of the menu
+        void hide();
+        void show();
     private:
         friend class DisplayControl;
-        void hide();
-        void hide(bool update);
-        void show();
         void show(bool update);
+        void hide(bool update);
         DisplaySubMenu(DisplayControl* display, DisplaySubMenu* parent, DisplayRep * rep, const std::string& name);
         DisplayRep* _rep;  // optional rep
         gui::SubMenu* _menu; // 
