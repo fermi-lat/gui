@@ -1,4 +1,4 @@
-//     $Header: /nfs/slac/g/glast/ground/cvs/gui/src/MotifGUI.cxx,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
+//     $Header: /nfs/slac/g/glast/ground/cvs/gui/src/MotifGUI.cxx,v 1.2 2001/05/30 19:39:41 burnett Exp $
 //  Author: G. Barrand, T. Burnett
 // Motif MotifGUI implementation
 
@@ -48,7 +48,7 @@ GUI* GUI::createGUI(const char* nameOfApp, const char* title)
     theGUI =new MotifGUI(nameOfApp, title);
     GUI::instance(theGUI);
     GUI::s_instance = theGUI; //(don't know if needed)
-    return theGUI:
+    return theGUI;
 }
 bool GUI::running=false;
 
