@@ -1,4 +1,4 @@
-//     $Id: GuiMgr.cxx,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
+//     $Id: GuiMgr.cxx,v 1.2 2001/05/08 03:28:50 burnett Exp $
 //  Author: Toby Burnett
 //
 //  Implement GuiMgr
@@ -6,7 +6,12 @@
 #include "gui/GuiMgr.h"
 #include "gui/SimpleCommand.h"
 
+#ifdef WIN32
 #include <sstream>
+#else // gcc < 2.9.5.3 dosen't know <sstream>,stringstream
+#include <strstream>
+#endif
+
 #include <iostream>
 
 
@@ -77,7 +82,11 @@ void GuiMgr::begin_event() // should be called at the beginning of an event
 { 
     static int n=0;
     display().clear();
+#ifdef WIN32
     std::stringstream label; label << " Event " << (++n) << '\0';
+#else // gcc < 2.9.5.3 dosen't know <sstream>,stringstream
+    std::strstream label; label << " Event " << (++n) << '\0';
+#endif
     title = std::string(label.str());
     display().setTitle(title); 
 }
