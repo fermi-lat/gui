@@ -1,4 +1,4 @@
-//     $Header: /nfs/slac/g/glast/ground/cvs/gui/src/MotifGUI.cxx,v 1.2 2001/05/30 19:39:41 burnett Exp $
+//     $Header: /nfs/slac/g/glast/ground/cvs/gui/src/MotifGUI.cxx,v 1.3 2001/06/28 17:29:45 kyoung Exp $
 //  Author: G. Barrand, T. Burnett
 // Motif MotifGUI implementation
 
@@ -220,7 +220,7 @@ void MotifGUI::endPullDownMenu()
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //                     commands
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-static void TimerCallback (  XtPointer a_data, XtIntervalId* timer )
+static void TimerCallback (  XtPointer /* a_data */, XtIntervalId* /*timer */ )
 {
 	GUI::running = false; //
 }

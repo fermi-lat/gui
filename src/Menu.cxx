@@ -1,4 +1,4 @@
-//     $Id: Menu.cxx,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
+//     $Id: Menu.cxx,v 1.2 2001/05/08 03:28:50 burnett Exp $
 //  Author: Toby Burnett
 //
 //   Menu class implementations, now just pass-through to GUI
@@ -9,6 +9,7 @@
 #include "gui/SimpleCommand.h"
 #include <strstream>
 #include <string>
+#include <cstdio> // for sprintf
 
 namespace gui {
 

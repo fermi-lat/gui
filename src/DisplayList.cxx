@@ -1,4 +1,4 @@
-//     $Id: DisplayList.cxx,v 1.2 2001/01/07 21:35:41 burnett Exp $
+//     $Id: DisplayList.cxx,v 1.3 2001/05/24 22:47:47 burnett Exp $
 //  Author: Toby Burnett
 //
 //
@@ -315,9 +315,10 @@ void DisplayList::draw(ViewPort* vw)
     if( hidden() || (m_nodelist==0) || (m_nodelist->size()==0) ) return;
 
     DispList::iterator diter = m_nodelist->begin();
-    DisplayList::Node* disp = *diter;
+
 
 #if 0 //THB disable this turkey!
+    DisplayList::Node* disp = *diter;
     // exit if scale is too small: first DisplayList::Node object does it
     if( ! (m_flags & noCheckDetailFlag)  ){
         float size = ((Limits*)disp)->checkScale(vw);

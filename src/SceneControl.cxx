@@ -1,4 +1,4 @@
-//     $Id: SceneControl.cpp,v 1.8 2000/05/04 21:55:17 burnett Exp $
+//     $Id: SceneControl.cxx,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
 //  Author: Toby Burnett
 //
 
@@ -153,7 +153,7 @@ void SceneControl::move_by(float x, float y)
 {   
 
     // prevent motion if click out of view
-    if( abs(x) < 1.0 && abs(y) < 1.0 )
+    if( fabs(x) < 1.0 && fabs(y) < 1.0 )
 
 	m_reference_point += m_current_view->transformToWorld(x,y);
 } 
