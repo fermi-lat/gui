@@ -1,4 +1,4 @@
-//     $Id: DisplayList.cxx,v 1.3 2001/05/24 22:47:47 burnett Exp $
+//     $Id: DisplayList.cxx,v 1.4 2001/10/06 04:22:14 burnett Exp $
 //  Author: Toby Burnett
 //
 //
@@ -496,8 +496,8 @@ DisplayList::PolyLine::addPoint(const GraphicsVector& pt)
 
 void
 DisplayList::PolyLine::draw(ViewPort* v)
-{  // N.B.: this only works for std::vector<GraphicsVector>
-    v->drawPL( begin(), size());
+{  // N.B.: note address of dereference
+    v->drawPL( &*begin(), size());
 }
 
 void
@@ -514,8 +514,8 @@ DisplayList::PolyLine::~PolyLine()
 DisplayList::Markers::Markers(const GraphicsVector& pt):PolyLine(pt){}
 
 void DisplayList::Markers::draw(ViewPort* v)
-{
-	v->draw_markers(begin(), size());
+{  // N.B.: note address of dereference
+	v->draw_markers(&*begin(), size());
 }
 //-----------------------------------------------------------------------
 
@@ -589,8 +589,8 @@ DisplayList::CoordList::CoordList(const GraphicsVector& pt):PolyLine(pt){}
 
 void
 DisplayList::CoordList::draw(ViewPort* v)
-{
-   v->coordinate3(begin(), size());
+{  // N.B.: note address of dereference
+   v->coordinate3(&*begin(), size());
 }
 
 
