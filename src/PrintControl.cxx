@@ -1,4 +1,4 @@
-//     $Id: PrintControl.cpp,v 1.7 1999/11/09 18:35:58 burnett Exp $
+//     $Id: PrintControl.cxx,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
 //  Author: Toby Burnett
 //
 //
@@ -13,9 +13,10 @@
 // the std::ostream* PrintControl::instance()->out(); 
 
 
+#include "gui/SubMenu.h"
 #include "gui/PrintControl.h"
 #include "gui/SimpleCommand.h"
-#include "gui/SubMenu.h"
+
 
 #include <cassert>
 
