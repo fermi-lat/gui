@@ -1,4 +1,4 @@
-//     $Id: DisplayRep.cpp,v 1.2 1999/02/26 21:19:35 dladams Exp $
+//     $Id: DisplayRep.cxx,v 1.2 2001/01/07 21:35:41 burnett Exp $
 //  Author: Toby Burnett
 
 #include "gui/DisplayRep.h"
@@ -78,7 +78,7 @@ DisplayRep::pallete[]= {
      { "maroon",   176,  48,  96},
      { "magenta",  255,   0, 255},
      { "khaki",    240, 230, 140},
-     { "grey",     192, 192, 192},
+     { "grey",     128, 128, 128},
      { "green",      0, 255,   0},
      { "gold",     255, 215,   0},
      { "brown",    165,  42,  42},
