@@ -1,4 +1,4 @@
-//     $Id: Menu.cpp,v 1.13 1999/11/26 14:44:50 burnett Exp $
+//     $Id: Menu.cxx,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
 //  Author: Toby Burnett
 //
 //   Menu class implementations, now just pass-through to GUI
@@ -41,8 +41,9 @@ Menu::~Menu()
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Menu* Menu::s_instance = 0;
 
-Menu* Menu::instance()
+Menu* Menu::instance(Menu* m)
 {
+    if(m) s_instance = m;
     return s_instance;
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

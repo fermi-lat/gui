@@ -1,4 +1,4 @@
-//     $Header: /cvsroot/d0cvs/gui/motif/MotifGUI.cpp,v 1.11 2000/05/08 22:26:33 burnett Exp $
+//     $Header: /nfs/slac/g/glast/ground/cvs/gui/src/MotifGUI.cxx,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
 //  Author: G. Barrand, T. Burnett
 // Motif MotifGUI implementation
 
@@ -45,15 +45,14 @@ namespace gui {
 GUI* GUI::createGUI(const char* nameOfApp, const char* title)
 {
     if( theGUI) return theGUI; // ensures only one instance
-    return (theGUI =new MotifGUI(nameOfApp, title));
+    theGUI =new MotifGUI(nameOfApp, title);
+    GUI::instance(theGUI);
+    GUI::s_instance = theGUI; //(don't know if needed)
+    return theGUI:
 }
 bool GUI::running=false;
 
-GUI* GUI::instance(){
-    if( !theGUI) createGUI("unknown", "(no title)");
-    return theGUI;
-}
-}
+}//namespace gui
 
 // forward declaration of  local utilities
 
