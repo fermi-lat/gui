@@ -1,4 +1,4 @@
-//   $Id: Xostream.h,v 1.2 2000/09/21 18:19:59 burnett Exp $
+//   $Id: Xostream.h,v 1.2 2001/01/25 23:15:13 tlindner Exp $
 // Project:
 //  author: Toby Burnett
 //
@@ -9,7 +9,7 @@
 #define XOSTREAM_H
  
 
-#include "graphics/GUI.h"
+#include "gui/GUI.h"
 
 
 class Xostream :  public std::ostream
