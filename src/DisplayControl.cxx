@@ -1,4 +1,4 @@
-//     $Id: DisplayControl.cxx,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
+//     $Id: DisplayControl.cxx,v 1.2 2001/01/25 01:36:33 burnett Exp $
 //  Author: Toby Burnett
 //
 // implementation of  Display control
@@ -207,7 +207,8 @@ private:
 	    :m_scene(s),m_rep(rep),m_flag(f){}
 	void execute()
 	{
-	    m_rep->show(m_flag);
+	    m_rep->update();
+            m_rep->show(m_flag);
 	    m_scene->redisplay();
 	}
 	DisplayControl* m_scene;
