@@ -1,4 +1,4 @@
-//     $Id: DisplayControl.cpp,v 1.21 1999/11/27 17:18:40 burnett Exp $
+//     $Id: DisplayControl.cxx,v 1.3 2001/04/21 23:00:32 burnett Exp $
 //  Author: Toby Burnett
 //
 // implementation of  Display control
@@ -55,14 +55,14 @@ DisplayControl::DisplayControl(Menu& menu, SceneControl* control)
 
 
     // this is to force link to include the Projector
-    Projector p((Draw2D*)0); 
+    Projector p((Draw2D*)0); p.canvas(); //fool warning?
 
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 DisplayControl::~DisplayControl()
 {
     delete m_control;
-    for( std::vector<SubMenu*>::iterator it=_submenus.begin(); it !=_submenus.end(); ++it)
+    for( std::vector<DisplaySubMenu*>::iterator it=_submenus.begin(); it !=_submenus.end(); ++it)
         delete *it;
 }
 //=====================================================================
@@ -207,7 +207,8 @@ private:
 	    :m_scene(s),m_rep(rep),m_flag(f){}
 	void execute()
 	{
-	    m_rep->show(m_flag);
+	    m_rep->update();
+            m_rep->show(m_flag);
 	    m_scene->redisplay();
 	}
 	DisplayControl* m_scene;
@@ -419,14 +420,14 @@ void DisplayControl::postScript()
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //      SubMenu implementation
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-DisplayControl::SubMenu& DisplayControl::subMenu(const std::string& name, DisplayRep *rep)
+DisplayControl::DisplaySubMenu& DisplayControl::subMenu(const std::string& name, DisplayRep *rep)
 {
-    SubMenu* s = new SubMenu(this, 0, rep, name);
+    DisplaySubMenu* s = new DisplaySubMenu(this, 0, rep, name);
     _submenus.push_back(s);  // save in this list to delete 
     return *s; 
 }
 
-DisplayControl::SubMenu::SubMenu(DisplayControl* display,SubMenu* parent, DisplayRep * rep, const std::string& name)
+DisplayControl::DisplaySubMenu::DisplaySubMenu(DisplayControl* display,DisplaySubMenu* parent, DisplayRep * rep, const std::string& name)
 : _rep(rep)
 , _display(display)
 {
@@ -444,50 +445,50 @@ DisplayControl::SubMenu::SubMenu(DisplayControl* display,SubMenu* parent, Displa
     if( rep) _display->add(rep);
 
     // top buttons to show or hide all on the menu or under it
-    _menu->addButton("Show all", new gui::SimpleCommand<SubMenu>(this, &SubMenu::show));
-    _menu->addButton("Hide all", new gui::SimpleCommand<SubMenu>(this, &SubMenu::hide));
+    _menu->addButton("Show all", new gui::SimpleCommand<DisplaySubMenu>(this, &DisplaySubMenu::show));
+    _menu->addButton("Hide all", new gui::SimpleCommand<DisplaySubMenu>(this, &DisplaySubMenu::hide));
     _menu->addSeparator();
 
 
 }
-DisplayControl::SubMenu& DisplayControl::SubMenu::subMenu(const std::string& name,DisplayRep * rep)
+DisplayControl::DisplaySubMenu& DisplayControl::DisplaySubMenu::subMenu(const std::string& name,DisplayRep * rep)
 {
-    return *new DisplayControl::SubMenu(_display,this,rep,name);
+    return *new DisplayControl::DisplaySubMenu(_display,this,rep,name);
 }
     
-void DisplayControl::SubMenu::add(DisplayRep * rep, const std::string& name)
+void DisplayControl::DisplaySubMenu::add(DisplayRep * rep, const std::string& name)
 {
     _display->useMenu(_menu);
     GUI::Toggle* display_toggle = _display->add(rep,name);
     if( display_toggle !=0) _rep_list.push_back(display_toggle);
     _display->useMenu();
 }
-void DisplayControl::SubMenu::show(){
+void DisplayControl::DisplaySubMenu::show(){
    _display->set_running(false); show(true); _display->set_running(true); _display->redisplay();}
-void DisplayControl::SubMenu::hide(){
+void DisplayControl::DisplaySubMenu::hide(){
    _display->set_running(false); hide(true); _display->set_running(true); _display->redisplay();}
 
-void DisplayControl::SubMenu::show(bool update)
+void DisplayControl::DisplaySubMenu::show(bool /* update*/)
 {
     if(_rep) _rep->show();
     for(std::vector<GUI::Toggle*>::iterator itt=_rep_list.begin(); itt!=_rep_list.end(); ++itt)
         (*itt)->set(); //set the toggle to the correct state
-    for(std::vector<SubMenu*>::iterator it = _submenus.begin(); it!=_submenus.end(); ++it)
+    for(std::vector<DisplaySubMenu*>::iterator it = _submenus.begin(); it!=_submenus.end(); ++it)
         (*it)->show(false);
 }
-void DisplayControl::SubMenu::hide(bool update)
+void DisplayControl::DisplaySubMenu::hide(bool /*update */)
 {
     if(_rep) _rep->hide();
     
     for(std::vector<GUI::Toggle*>::iterator itt=_rep_list.begin(); itt!=_rep_list.end(); ++itt)
         (*itt)->unset();
-    for(std::vector<SubMenu*>::iterator it = _submenus.begin(); it!=_submenus.end(); ++it)
+    for(std::vector<DisplaySubMenu*>::iterator it = _submenus.begin(); it!=_submenus.end(); ++it)
         (*it)->hide(false); 
 }
 
-DisplayControl::SubMenu::~SubMenu()
+DisplayControl::DisplaySubMenu::~DisplaySubMenu()
 {
-    for(std::vector<SubMenu*>::iterator it = _submenus.begin(); it!=_submenus.end(); ++it) delete (*it);
+    for(std::vector<DisplaySubMenu*>::iterator it = _submenus.begin(); it!=_submenus.end(); ++it) delete (*it);
 
 }
 
