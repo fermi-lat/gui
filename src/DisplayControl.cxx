@@ -1,4 +1,4 @@
-//     $Id: DisplayControl.cxx,v 1.5 2002/05/07 00:25:00 burnett Exp $
+//     $Id: DisplayControl.cxx,v 1.6 2002/07/01 21:03:53 burnett Exp $
 //  Author: Toby Burnett
 //
 // implementation of  Display control
@@ -420,7 +420,7 @@ void DisplayControl::postScript()
 //--------------------------------
 // ask the scene to draw itself to a file in postscript
 {
-    static filenumber=0;
+    static int filenumber=0;
 #ifdef DEFECT_NO_STRINGSTREAM
     std::strstream filename;
     filename << "display" << (filenumber++) << ".ps";
