@@ -1,5 +1,5 @@
 #ifdef WIN32 // only used for the windows app
-// $Header:$
+// $Header: /nfs/slac/g/glast/ground/cvs/gui/src/WinMain.cxx,v 1.1 2001/01/07 21:34:44 burnett Exp $
 
 #include "WinGui.h"
 #include "WinScene.h"
@@ -107,9 +107,12 @@ LRESULT CALLBACK   WndProc (HWND hWnd, unsigned Message,
             break;
         }
     case WM_DESTROY:
+        Menu::instance()->quit();
+#if 0
         ::PostQuitMessage(0);
         WinGUI::s_quitting=true;
         GUI::running=false;
+#endif
         break;
     case WM_SETCURSOR:  // mouse comes over window--make it the normal arrow
         {

@@ -1,4 +1,4 @@
-//     $Id: Menu.h,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
+//     $Id: Menu.h,v 1.2 2001/05/08 03:28:50 burnett Exp $
 //  Author: Toby Burnett
 //
 
@@ -73,6 +73,9 @@ public:
     
     static Menu* instance(Menu* m=0); 
 	// deprecated method
+
+    void quit();
+
 private:
 
     class Node{
@@ -86,7 +89,6 @@ private:
     void setMenu(Node* m);
     void endMenu();
     void addSeparator();
-    void quit();
 
     static Menu* s_instance;
 
