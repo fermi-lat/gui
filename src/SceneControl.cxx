@@ -1,4 +1,4 @@
-//     $Id: SceneControl.cxx,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
+//     $Id: SceneControl.cxx,v 1.2 2001/10/06 04:22:14 burnett Exp $
 //  Author: Toby Burnett
 //
 
@@ -7,7 +7,7 @@
 #include "gui/ViewPort.h"
 #include "gui/Scene.h"
 
-
+#include <cmath>
 #include <ctype.h>      // for tolower
 
 namespace gui {
