@@ -1,4 +1,4 @@
-//  $Header: /cvsroot/d0cvs/gui/gui/GraphicsVector.h,v 1.6 2000/11/19 05:29:09 burnett Exp $
+//  $Header: /nfs/slac/g/glast/ground/cvs/gui/gui/GraphicsVector.h,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
 //  Author: Toby Burnett
 //  Project: graphics
 //
@@ -10,6 +10,7 @@
 class SpacePoint;
 class SpaceVector;
 class Hep3Vector;
+class HepPoint3D;
 namespace gui {
 
 
@@ -30,6 +31,7 @@ public:
     GraphicsVector(const SpaceVector& v);
 #endif
     GraphicsVector(const Hep3Vector & v);
+    GraphicsVector(const HepPoint3D & v);
 
     float x()const{return m_x;}
     float y()const{return m_y;}
