@@ -1,4 +1,4 @@
-//     $Id: SceneControl.cpp,v 1.8 2000/05/04 21:55:17 burnett Exp $
+//     $Id: SceneControl.cxx,v 1.2 2001/10/06 04:22:14 burnett Exp $
 //  Author: Toby Burnett
 //
 
@@ -7,7 +7,7 @@
 #include "gui/ViewPort.h"
 #include "gui/Scene.h"
 
-
+#include <cmath>
 #include <ctype.h>      // for tolower
 
 namespace gui {
@@ -153,7 +153,7 @@ void SceneControl::move_by(float x, float y)
 {   
 
     // prevent motion if click out of view
-    if( abs(x) < 1.0 && abs(y) < 1.0 )
+    if( fabs(x) < 1.0 && fabs(y) < 1.0 )
 
 	m_reference_point += m_current_view->transformToWorld(x,y);
 } 
