@@ -1,4 +1,4 @@
-//     $Id: GuiMgr.h,v 1.21 2000/05/05 00:33:37 burnett Exp $
+//     $Id: GuiMgr.h,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
 //  Author: Toby Burnett
 //
 
@@ -11,7 +11,7 @@
 #include "gui/GUI.h"
 
 #include <vector>
-#include <ostream>
+#include <iostream>
 
 namespace gui {
         
