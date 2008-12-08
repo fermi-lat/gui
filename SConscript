@@ -1,5 +1,5 @@
 # -*- python -*-
-# $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/gui/SConscript,v 1.1 2008/07/09 21:13:47 glastrm Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/gui/SConscript,v 1.2 2008/07/11 00:32:27 glast Exp $
 # Authors: T.Burnett <tburnett@u.washington.edu>
 # Version: gui-03-07-02
 Import('baseEnv')
@@ -26,3 +26,6 @@ progEnv.Tool('guiLib')
 testGui = progEnv.Program('testGui', listFiles(['src/test/*.cxx']))
 
 progEnv.Tool('registerObjects', package = 'gui', libraries = [gui, guiSystem], testApps = [testGui], includes = listFiles(['gui/*.h']))
+
+
+
