@@ -1,5 +1,5 @@
 # -*- python -*-
-# $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/gui/SConscript,v 1.5 2009/08/07 00:49:22 jrb Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/gui/SConscript,v 1.6 2009/11/06 01:57:18 jrb Exp $
 # Authors: T.Burnett <tburnett@u.washington.edu>
 # Version: gui-03-07-03
 Import('baseEnv')
@@ -8,7 +8,6 @@ Import('packages')
 progEnv = baseEnv.Clone()
 libEnv = baseEnv.Clone()
 
-libEnv.Tool('guiLib', depsOnly = 1)
 gui = libEnv.StaticLibrary('gui',
                            listFiles(['src/LoopCommand.cxx','src/SceneControl.cxx',
                                       'src/Menu.cxx', 'src/SubMenu.cxx',
