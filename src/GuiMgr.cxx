@@ -1,4 +1,4 @@
-//     $Id: GuiMgr.cpp,v 1.23 2000/09/29 23:08:05 burnett Exp $
+//     $Id: GuiMgr.cxx,v 1.4 2001/10/06 04:22:14 burnett Exp $
 //  Author: Toby Burnett
 //
 //  Implement GuiMgr
@@ -6,7 +6,12 @@
 #include "gui/GuiMgr.h"
 #include "gui/SimpleCommand.h"
 
+#ifdef WIN32
+#include <sstream>
+#else // gcc < 2.9.5.3 dosen't know <sstream>,stringstream
 #include <strstream>
+#endif
+
 #include <iostream>
 
 
@@ -77,16 +82,23 @@ void GuiMgr::begin_event() // should be called at the beginning of an event
 { 
     static int n=0;
     display().clear();
+#ifdef WIN32
+    std::stringstream label; label << " Event " << (++n) << '\0';
+#else // gcc < 2.9.5.3 dosen't know <sstream>,stringstream
     std::strstream label; label << " Event " << (++n) << '\0';
+#endif
     title = std::string(label.str());
     display().setTitle(title); 
-#ifdef _MSC_VER 
-    label.freeze(false); // prevent memory leak
-#endif
 }
 
 void GuiMgr::end_event()  // must be called at the end of an event to update, allow pause
-{        
+{      
+    if( m_state==SKIPPING){
+//         gui().processMessages();
+         return;
+    }
+    if(m_state==INTERRUPT)m_state=SKIPPING;
+
     display().update();
     printer().printAll();
     gui().processMessages();
@@ -109,6 +121,8 @@ void GuiMgr::pause() // called by GUI message (space bar or button)
     switch  (m_state) {
     case RUNNING: m_state=PAUSED;  stop_loop(); break;
     case PAUSED:  stop_loop(); break;
+    case INITIAL: case DONE: case INTERRUPT: break;
+     case SKIPPING: stop_loop(); break;
     }
 }
 
@@ -117,6 +131,8 @@ void GuiMgr::resume() // called by GUI message (CR key or button )
     switch  (m_state) {
     case RUNNING: m_state=PAUSED;  stop_loop(); break;
     case PAUSED:  m_state=RUNNING; stop_loop(); break;
+     case SKIPPING: stop_loop(); break;
+    case INITIAL: case DONE:  case INTERRUPT: break;
     }
 }
 void GuiMgr::stop_loop() // stop the loop in the end_event method
