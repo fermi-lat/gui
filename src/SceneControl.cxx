@@ -1,4 +1,4 @@
-//     $Id: SceneControl.cpp,v 1.8 2000/05/04 21:55:17 burnett Exp $
+//     $Id: SceneControl.cxx,v 1.3 2001/10/09 14:22:05 burnett Exp $
 //  Author: Toby Burnett
 //
 
@@ -7,7 +7,7 @@
 #include "gui/ViewPort.h"
 #include "gui/Scene.h"
 
-
+#include <cmath>
 #include <ctype.h>      // for tolower
 
 namespace gui {
@@ -153,7 +153,7 @@ void SceneControl::move_by(float x, float y)
 {   
 
     // prevent motion if click out of view
-    if( abs(x) < 1.0 && abs(y) < 1.0 )
+    if( fabs(x) < 1.0 && fabs(y) < 1.0 )
 
 	m_reference_point += m_current_view->transformToWorld(x,y);
 } 
@@ -166,7 +166,7 @@ void SceneControl::move_down( float howfar){ move_by(0, howfar);}
 //                 adjust magnification (zoom)
 
 void SceneControl::zoom_in(float howfar) { m_current_view->zoom(1+howfar);}
-void SceneControl::zoom_out(float howfar){ m_current_view->zoom(1-howfar);}
+void SceneControl::zoom_out(float howfar){ m_current_view->zoom(1./(1+howfar));}
 void SceneControl::set_zoom(float z)     { m_current_view->setZoom(z);}
 
 
