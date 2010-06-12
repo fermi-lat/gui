@@ -1,4 +1,4 @@
-//     $Header: /cvsroot/d0cvs/gui/windows/WinDraw.h,v 1.1 1999/11/03 04:38:54 burnett Exp $
+//     $Header: /nfs/slac/g/glast/ground/cvs/gui/src/WinDraw.h,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
 //
 //
 // Special Draw2D subclass for Win graphics
@@ -81,7 +81,9 @@ public:
 
 private:
     int maxx, maxy;         // coords of viewport
-   
+    bool clip(float x, float y,
+		 int& ix1, int& iy1, int& ix2, int& iy2);
+    float m_lastx, m_lasty;
     HDC m_hdc;
     HWND m_win;
 };
