@@ -1,4 +1,4 @@
-//     $Id: GuiMgr.h,v 1.21 2000/05/05 00:33:37 burnett Exp $
+//     $Id: GuiMgr.h,v 1.2 2001/01/25 23:05:25 tlindner Exp $
 //  Author: Toby Burnett
 //
 
@@ -11,7 +11,7 @@
 #include "gui/GUI.h"
 
 #include <vector>
-#include <ostream>
+#include <iostream>
 
 namespace gui {
         
@@ -77,7 +77,7 @@ public:
     void resume(); // set status to skip next loop (or resume if paused)
     void stop_loop();
     void queryPause();
-    enum State {INITIAL, RUNNING, PAUSED, DONE};
+    enum State {INITIAL, RUNNING, PAUSED, DONE, SKIPPING, INTERRUPT};
     State state()const;
     void setState(State s);
 
