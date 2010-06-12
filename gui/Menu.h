@@ -1,4 +1,4 @@
-//     $Id: Menu.h,v 1.7 1999/11/26 14:44:11 burnett Exp $
+//     $Id: Menu.h,v 1.2 2001/05/08 03:28:50 burnett Exp $
 //  Author: Toby Burnett
 //
 
@@ -71,8 +71,11 @@ public:
     void add(MenuBase* client);
     // client uses to schedule a call to its finishSetup method
     
-    static Menu* instance(); 
+    static Menu* instance(Menu* m=0); 
 	// deprecated method
+
+    void quit();
+
 private:
 
     class Node{
@@ -86,7 +89,6 @@ private:
     void setMenu(Node* m);
     void endMenu();
     void addSeparator();
-    void quit();
 
     static Menu* s_instance;
 
