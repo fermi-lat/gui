@@ -1,4 +1,4 @@
-//     $Id: GUI.h,v 1.6 2000/05/05 00:33:37 burnett Exp $
+//     $Id: GUI.h,v 1.2 2001/05/08 03:28:50 burnett Exp $
 // Project: Atlas top-level prototype
 //  Author: Toby Burnett
 
@@ -92,12 +92,14 @@ public:
     // Return a GUI. Expect subclass to implement. Prevents more that one GUI implementation
     // in an executable
 
-    static GUI* instance();
+    static GUI* instance(GUI* i=0);
     static bool running;  // use to check that GUI has been started
 
 protected:
     GUI(const char* title);  // abstract class
-    const char* _winTitle;  // window title
+    const char* _winTitle;   // window title
+private:
+    static GUI* s_instance;  // public to allow simple setup
 
 };
 
@@ -105,7 +107,7 @@ inline GUI::GUI(const char* title):_winTitle(title){}  // abstract class
 inline GUI::~GUI(){}
 inline void    GUI::addToMenu(const char* , Command* ){}
 inline GUI::Toggle*   GUI::addToggleToMenu(const char*, bool, Command*, Command* ){return 0;}
-inline GUI::Menu*   GUI::beginPullDownMenu(const char*, GUI::Menu* m){return 0;}
+inline GUI::Menu*   GUI::beginPullDownMenu(const char*, GUI::Menu*){return 0;}
 inline void    GUI::restorePullDownMenu(GUI::Menu* ){}
 inline void    GUI::endPullDownMenu(){}
 inline void    GUI::menuSeparator(){}
