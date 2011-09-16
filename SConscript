@@ -1,7 +1,7 @@
 # -*- python -*-
-# $Header: /nfs/slac/g/glast/ground/cvs/gui/SConscript,v 1.8 2010/06/12 22:44:34 jrb Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/gui/SConscript,v 1.9 2011/05/21 20:11:51 heather Exp $
 # Authors: T.Burnett <tburnett@u.washington.edu>
-# Version: gui-03-07-05
+# Version: gui-03-07-06
 Import('baseEnv')
 Import('listFiles')
 Import('packages')
