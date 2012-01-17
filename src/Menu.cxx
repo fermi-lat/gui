@@ -1,4 +1,4 @@
-//     $Id: Menu.cxx,v 1.2 2001/05/08 03:28:50 burnett Exp $
+//     $Id: Menu.cxx,v 1.3 2001/10/06 04:22:14 burnett Exp $
 //  Author: Toby Burnett
 //
 //   Menu class implementations, now just pass-through to GUI
@@ -10,6 +10,7 @@
 #include <strstream>
 #include <string>
 #include <cstdio> // for sprintf
+#include <cstdlib>
 
 namespace gui {
 

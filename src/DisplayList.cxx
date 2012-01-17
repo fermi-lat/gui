@@ -1,4 +1,4 @@
-//     $Id: DisplayList.cxx,v 1.4 2001/10/06 04:22:14 burnett Exp $
+//     $Id: DisplayList.cxx,v 1.5 2002/10/27 19:10:44 burnett Exp $
 //  Author: Toby Burnett
 //
 //
@@ -12,6 +12,7 @@
 #include <cassert>
 #include <cfloat>
 #include <cmath>
+#include <cstring>
 
 namespace gui {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

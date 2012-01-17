@@ -1,4 +1,4 @@
-//     $Header: /nfs/slac/g/glast/ground/cvs/gui/src/MotifGUI.cxx,v 1.3 2001/06/28 17:29:45 kyoung Exp $
+//     $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/gui/src/MotifGUI.cxx,v 1.4 2001/10/06 04:22:14 burnett Exp $
 //  Author: G. Barrand, T. Burnett
 // Motif MotifGUI implementation
 
@@ -28,6 +28,7 @@
 #include <iostream>
 #include <cstdio>
 #include <cassert>
+#include <cstdlib>
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //          File-scope variables (could be class or object variables)

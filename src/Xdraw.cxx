@@ -1,8 +1,9 @@
-// $Header: /nfs/slac/g/glast/ground/cvs/gui/src/Xdraw.cxx,v 1.1.1.1 2001/01/04 01:01:12 burnett Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/gui/src/Xdraw.cxx,v 1.2 2001/10/06 04:22:15 burnett Exp $
 //  Author: Hardy, T. Burnett
 //
 #ifndef WIN32  // stupid to prevent compilation in windows 
 
+#include <cstring>
 #include "Xdraw.h"
 #include "gui/DisplayRep.h"
 #include <vector>
