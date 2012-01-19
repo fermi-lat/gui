@@ -1,5 +1,5 @@
 # -*- python -*-
-# $Header: /nfs/slac/g/glast/ground/cvs/gui/SConscript,v 1.10 2011/09/16 04:15:02 heather Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/gui/SConscript,v 1.11 2012/01/16 21:20:50 heather Exp $
 # Authors: T.Burnett <tburnett@u.washington.edu>
 # Version: gui-03-07-07
 Import('baseEnv')
@@ -18,22 +18,33 @@ gui = libEnv.StaticLibrary('gui',
                                       'src/PrintControl.cxx', 'src/GuiMgr.cxx',
                                       'src/Projector.cxx', 'src/Scene.cxx',
                                       'src/GUI.cxx']))
+objList = []
 if baseEnv['PLATFORM'] == 'win32':
     guiSystem = libEnv.StaticLibrary('guisystem',
                                      ['src/WinGUI.cxx', 'src/WinGUIostream.cxx',
-                                      'src/WinMain.cxx', 'src/WinScene.cxx',
+                                      'src/WinScene.cxx',
                                       'src/WinDraw.cxx'])
+    WinMainObj = libEnv.Object('src/WinMain.cxx')
+    winguiRES  = libEnv.RES('src/wingui.rc')
+    objList += [[WinMainObj, libEnv], [winguiRES, libEnv]]
+
 else:
     guiSystem = libEnv.StaticLibrary('guisystem',
                                      ['src/MotifGUI.cxx', 'src/XScene.cxx',
                                       'src/Xdraw.cxx', 'src/Xostream.cxx'])
 
 progEnv.Tool('guiLib')
-testGui = progEnv.Program('testGui', listFiles(['src/test/*.cxx']))
+testsrcs = listFiles(['src/test/*.cxx'])
+if baseEnv['PLATFORM'] == 'win32':
+    testsrcs += [WinMainObj, winguiRES]
+testGui = progEnv.Program('testGui', testsrcs)
 
 progEnv.Tool('registerTargets', package = 'gui',
              staticLibraryCxts = [[gui, libEnv], [guiSystem, libEnv]],
-             testAppCxts = [[testGui, progEnv]], includes = listFiles(['gui/*.h']))
+             testAppCxts = [[testGui, progEnv]], 
+             includes = listFiles(['gui/*.h']),
+             objects = objList)
+
 
 
 
