@@ -1,5 +1,5 @@
 #ifdef WIN32 // only used for the windows app
-// $Header: /nfs/slac/g/glast/ground/cvs/gui/src/WinMain.cxx,v 1.1 2001/01/07 21:34:44 burnett Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/gui/src/WinMain.cxx,v 1.2 2002/11/01 22:57:05 burnett Exp $
 
 #include "WinGui.h"
 #include "WinScene.h"
