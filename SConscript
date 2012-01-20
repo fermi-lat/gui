@@ -1,7 +1,7 @@
 # -*- python -*-
-# $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/gui/SConscript,v 1.11 2012/01/16 21:20:50 heather Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/gui/SConscript,v 1.12 2012/01/19 20:13:10 jrb Exp $
 # Authors: T.Burnett <tburnett@u.washington.edu>
-# Version: gui-03-07-07
+# Version: gui-03-07-08
 Import('baseEnv')
 Import('listFiles')
 Import('packages')
