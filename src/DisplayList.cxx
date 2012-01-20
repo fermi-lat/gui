@@ -1,4 +1,4 @@
-//     $Id: DisplayList.cpp,v 1.3 1999/10/22 18:17:13 burnett Exp $
+//     $Id: DisplayList.cxx,v 1.5 2002/10/27 19:10:44 burnett Exp $
 //  Author: Toby Burnett
 //
 //
@@ -12,6 +12,7 @@
 #include <cassert>
 #include <cfloat>
 #include <cmath>
+#include <cstring>
 
 namespace gui {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -315,16 +316,19 @@ void DisplayList::draw(ViewPort* vw)
     if( hidden() || (m_nodelist==0) || (m_nodelist->size()==0) ) return;
 
     DispList::iterator diter = m_nodelist->begin();
-    DisplayList::Node* disp = *diter;
 
+
+#if 0 //THB disable this turkey!
+    DisplayList::Node* disp = *diter;
     // exit if scale is too small: first DisplayList::Node object does it
     if( ! (m_flags & noCheckDetailFlag)  ){
         float size = ((Limits*)disp)->checkScale(vw);
         if( size < 1 && size < vw->detail() ) {
-    	    disp->draw(vw);
-	    return;
-	}
+			disp->draw(vw);
+			return;
+		}
     }
+#endif
     if( selected() )  vw->set_enhanced(1);
 
     // get all the other DisplayList::Node objects to draw themselves
@@ -412,7 +416,7 @@ void DisplayList::indexedLineSet(const int* a, int n)
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void DisplayList::move_to(const GraphicsVector& pt)
+void DisplayList::moveTo(const GraphicsVector& pt)
 //------------------------------------------
 {
         addDisp( new PolyLine(pt) );
@@ -420,7 +424,7 @@ void DisplayList::move_to(const GraphicsVector& pt)
         checkScale(pt);
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void DisplayList::line_to(const GraphicsVector& pt)
+void DisplayList::lineTo(const GraphicsVector& pt)
 //------------------------------------------
 {
     if( status != POLYLINE )
@@ -493,8 +497,8 @@ DisplayList::PolyLine::addPoint(const GraphicsVector& pt)
 
 void
 DisplayList::PolyLine::draw(ViewPort* v)
-{  // N.B.: this only works for std::vector<GraphicsVector>
-    v->drawPL( begin(), size());
+{  // N.B.: note address of dereference
+    v->drawPL( &*begin(), size());
 }
 
 void
@@ -511,8 +515,8 @@ DisplayList::PolyLine::~PolyLine()
 DisplayList::Markers::Markers(const GraphicsVector& pt):PolyLine(pt){}
 
 void DisplayList::Markers::draw(ViewPort* v)
-{
-	v->draw_markers(begin(), size());
+{  // N.B.: note address of dereference
+	v->draw_markers(&*begin(), size());
 }
 //-----------------------------------------------------------------------
 
@@ -586,8 +590,8 @@ DisplayList::CoordList::CoordList(const GraphicsVector& pt):PolyLine(pt){}
 
 void
 DisplayList::CoordList::draw(ViewPort* v)
-{
-   v->coordinate3(begin(), size());
+{  // N.B.: note address of dereference
+   v->coordinate3(&*begin(), size());
 }
 
 
