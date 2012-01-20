@@ -1,8 +1,9 @@
-// $Header: /cvsroot/d0cvs/gui/motif/Xdraw.cpp,v 1.7 2000/11/16 01:15:59 burnett Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/gui/src/Xdraw.cxx,v 1.2 2001/10/06 04:22:15 burnett Exp $
 //  Author: Hardy, T. Burnett
 //
 #ifndef WIN32  // stupid to prevent compilation in windows 
 
+#include <cstring>
 #include "Xdraw.h"
 #include "gui/DisplayRep.h"
 #include <vector>
@@ -84,7 +85,7 @@ void Xdraw::move_to(float x, float y)
     lastx = x;
     lasty = y;
 }
-static bool inline inside(float x, float y){return fabs(x)<1.01 && fabs(y)<1.01;}
+inline static bool inside(float x, float y){return fabs(x)<1.01 && fabs(y)<1.01;}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Special clipping routine since X seems to mess up with high magnification
 bool Xdraw::clip(float x, float y,
@@ -133,7 +134,7 @@ void Xdraw::line_to(float x, float y)
   lastx = x;
   lasty = y;
 }
-void Xdraw::fill_polygon(const float* xy, int npoints, Shading pattern)
+void Xdraw::fill_polygon(const float* xy, int npoints, Shading /*pattern*/)
 {
   // fill a single polygon
   XPoint * points = new XPoint[npoints];
