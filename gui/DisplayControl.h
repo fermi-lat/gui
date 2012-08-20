@@ -1,4 +1,4 @@
-//     $Id: DisplayControl.h,v 1.12 1999/11/27 17:18:39 burnett Exp $
+//     $Id: DisplayControl.h,v 1.2 2001/01/25 01:36:32 burnett Exp $
 //  Author: Toby Burnett
 //
 //
@@ -89,36 +89,37 @@ public:
 
     //------------------------------------------------------------------
     // Define nested class to handle submenu
-    class SubMenu     {
+    class DisplaySubMenu     {
         // This is a special SubMenu, containing a pointer to a gui::SubMenu,
         // and a list of nested SubMenus (allowing a tree)
     public:
-        ~SubMenu();
+        ~DisplaySubMenu();
         
-        SubMenu& subMenu(const std::string& label, DisplayRep* rep=0);
+        DisplaySubMenu& subMenu(const std::string& label, DisplayRep* rep=0);
         // return reference to a new sub menu, with given button label, and optional rep
         // that will be controlled by a "Show All" button at its top.
         // This button also applies to all submenus of this
 
-        void add(DisplayRep * rep, const std::string& name="");
+        void add(DisplayRep * rep, const std::string& name="", bool initial_state=true);
         // add a rep with optional name to be used for button
 
+        /// set the over-all state of the menu
+        void hide();
+        void show();
     private:
         friend class DisplayControl;
-        void hide();
-        void hide(bool update);
-        void show();
         void show(bool update);
-        SubMenu(DisplayControl* display, SubMenu* parent, DisplayRep * rep, const std::string& name);
+        void hide(bool update);
+        DisplaySubMenu(DisplayControl* display, DisplaySubMenu* parent, DisplayRep * rep, const std::string& name);
         DisplayRep* _rep;  // optional rep
         gui::SubMenu* _menu; // 
         DisplayControl* _display;
-        std::vector<SubMenu*> _submenus;
+        std::vector<DisplaySubMenu*> _submenus;
         std::vector<GUI::Toggle*> _rep_list; // list of toggles for reps
     };
     //------------------------------------------------------------------
 
-    SubMenu& subMenu(const std::string& label, DisplayRep* rep=0);
+    DisplaySubMenu& subMenu(const std::string& label, DisplayRep* rep=0);
     // function that returns a new SubMenu
 
 
@@ -141,7 +142,7 @@ private:
 
     Draw2D*     m_canvas;	// access to the 2-d canvas
 
-    std::vector<SubMenu*> _submenus; // list to delete.
+    std::vector<DisplaySubMenu*> _submenus; // list to delete.
 };
 
 inline gui::SubMenu& DisplayControl::menu(){return *m_sub_menu;} 
