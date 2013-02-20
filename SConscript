@@ -1,5 +1,5 @@
 # -*- python -*-
-# $Header: /nfs/slac/g/glast/ground/cvs/gui/SConscript,v 1.14 2012/08/18 00:29:11 jrb Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/gui/SConscript,v 1.15 2012/08/20 19:03:11 jrb Exp $
 # Authors: T.Burnett <tburnett@u.washington.edu>
 # Version: gui-03-08-00
 Import('baseEnv')
@@ -27,7 +27,8 @@ if baseEnv['PLATFORM'] == 'win32':
                                       'src/WinDraw.cxx'])
     WinMainObj = libEnv.Object('src/WinMain.cxx')
     winguiRES  = libEnv.RES('src/wingui.rc')
-    objList += [[WinMainObj, libEnv], [winguiRES, libEnv]]
+    guiForMain = libEnv.StaticLibrary('guiForMain', [WinMainObj, winguiRES])
+    ##objList += [[WinMainObj, libEnv], [winguiRES, libEnv]]
 
 else:
     guiSystem = libEnv.StaticLibrary('guisystem',
@@ -40,11 +41,18 @@ if baseEnv['PLATFORM'] == 'win32':
     testsrcs += [WinMainObj, winguiRES]
 testGui = progEnv.Program('testGui', testsrcs)
 
-progEnv.Tool('registerTargets', package = 'gui',
-             staticLibraryCxts = [[gui, libEnv], [guiSystem, libEnv]],
+if baseEnv['PLATFORM'] == 'win32':
+    progEnv.Tool('registerTargets', package = 'gui',
+                 staticLibraryCxts = [[gui, libEnv], [guiSystem, libEnv],
+                                      [guiForMain, libEnv]],
              testAppCxts = [[testGui, progEnv]], 
-             includes = listFiles(['gui/*.h']),
-             objects = objList)
+             includes = listFiles(['gui/*.h']) )
+else:
+    progEnv.Tool('registerTargets', package = 'gui',
+                 staticLibraryCxts = [[gui, libEnv], [guiSystem, libEnv]],
+                 testAppCxts = [[testGui, progEnv]], 
+                 includes = listFiles(['gui/*.h']))
+
 
 
 
