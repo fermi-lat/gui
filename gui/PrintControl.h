@@ -1,4 +1,4 @@
-//     $Id: PrintControl.h,v 1.3 2000/11/19 05:29:09 burnett Exp $
+//     $Id: PrintControl.h,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
 //  Author: Toby Burnett
 //
 // Define the singleton PrintControl class 
@@ -61,7 +61,6 @@ public:
     void quit(){};  // dummy for now
 
     const char* nameOf()const {return "PrintControl";}
-    static PrintControl* instance();
     
 private:
     void setup();
@@ -82,8 +81,6 @@ private:
 
     PrintList m_print_commands;
 
-    static PrintControl* s_instance;
-
 
 };
 
@@ -96,7 +93,7 @@ private:
 template<class T>
 class Printer_T : public Command {
 public:
-    Printer_T(const T* t):m_t(t),m_out(PrintControl::instance()->out()){}
+    Printer_T(const T* t, std::ostream* out=&std::cout):m_t(t),m_out(out){}
     void execute(){m_t->printOn(*m_out);}
 private:
     const T* m_t;
