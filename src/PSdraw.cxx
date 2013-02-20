@@ -1,11 +1,11 @@
-//  $Header: /cvsroot/d0cvs/gui/src/PSdraw.cpp,v 1.7 1999/11/16 17:38:27 burnett Exp $
+//  $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/gui/src/PSdraw.cxx,v 1.1.1.1 2001/01/04 01:01:11 burnett Exp $
 // PostScript drawer imlementation 
 // created by Hardy, 28 Mar 94
 
 #include "PSdraw.h"
 #include "gui/DisplayRep.h"
 
-
+#include <cstring>
 #include <iostream>
 #include <iomanip>
 
