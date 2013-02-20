@@ -1,5 +1,5 @@
 // Test program for gui graphical display
-// $Header: /cvsroot/d0cvs/gui/test/testgui.cpp,v 1.13 1999/11/06 22:16:19 burnett Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/gui/src/test/testmain.cxx,v 1.1.1.1 2001/01/04 01:01:12 burnett Exp $
 
 
 #if defined(_DEBUG) && defined (_WIN32) //boilerplate for memory leak check
@@ -12,7 +12,7 @@
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //         demo main 
-int main(int argc, char** argv)
+int main(int /*argc */, char** /*argv*/)
 {
   //force into link  
     if(0)gui::GUI::createGUI();
