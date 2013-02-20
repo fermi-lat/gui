@@ -1,4 +1,4 @@
-//     $Header: /cvsroot/d0cvs/gui/motif/MotifGUI.cpp,v 1.11 2000/05/08 22:26:33 burnett Exp $
+//     $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/gui/src/MotifGUI.cxx,v 1.4 2001/10/06 04:22:14 burnett Exp $
 //  Author: G. Barrand, T. Burnett
 // Motif MotifGUI implementation
 
@@ -28,6 +28,7 @@
 #include <iostream>
 #include <cstdio>
 #include <cassert>
+#include <cstdlib>
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //          File-scope variables (could be class or object variables)
@@ -45,15 +46,14 @@ namespace gui {
 GUI* GUI::createGUI(const char* nameOfApp, const char* title)
 {
     if( theGUI) return theGUI; // ensures only one instance
-    return (theGUI =new MotifGUI(nameOfApp, title));
+    theGUI =new MotifGUI(nameOfApp, title);
+    GUI::instance(theGUI);
+    GUI::s_instance = theGUI; //(don't know if needed)
+    return theGUI;
 }
 bool GUI::running=false;
 
-GUI* GUI::instance(){
-    if( !theGUI) createGUI("unknown", "(no title)");
-    return theGUI;
-}
-}
+}//namespace gui
 
 // forward declaration of  local utilities
 
@@ -221,7 +221,7 @@ void MotifGUI::endPullDownMenu()
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //                     commands
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-static void TimerCallback (  XtPointer a_data, XtIntervalId* timer )
+static void TimerCallback (  XtPointer /* a_data */, XtIntervalId* /*timer */ )
 {
 	GUI::running = false; //
 }
